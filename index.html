@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bataille d'Eau Géante — Louvain-la-Neuve · Plan d'Action</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07131a;
+    --bg-2: #0c1e29;
+    --surface: #11283a;
+    --surface-2: #173347;
+    --border: #1f3d52;
+    --text: #f5efe6;
+    --text-muted: #8da3b3;
+    --text-dim: #5a7283;
+    --accent: #00e6c8;
+    --accent-glow: rgba(0, 230, 200, 0.15);
+    --warm: #ff7a59;
+    --warm-glow: rgba(255, 122, 89, 0.15);
+    --danger: #ff4757;
+    --gold: #f5b942;
+    --gold-glow: rgba(245, 185, 66, 0.12);
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Manrope', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* Progress bar */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--warm));
+    z-index: 1000; width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  /* Top nav */
+  nav.topnav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(7, 19, 26, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  nav.topnav .inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 600;
+    font-size: 1.1rem; letter-spacing: -0.01em;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .brand span { color: var(--accent); }
+
+  .nav-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  .nav-list {
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px 24px 8px;
+    border-top: 1px solid var(--border);
+    margin-top: 14px;
+  }
+  .nav-list.open { display: flex; }
+  .nav-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 10px 12px;
+    border-radius: 6px;
+    display: flex; align-items: baseline; gap: 12px;
+    transition: all 0.15s;
+  }
+  .nav-list a:hover { background: var(--surface); color: var(--accent); }
+  .nav-list a .num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    opacity: 0.7;
+    min-width: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .nav-toggle { display: none; }
+    .nav-list {
+      display: flex !important;
+      flex-direction: row;
+      padding: 0;
+      border-top: none;
+      margin-top: 0;
+      gap: 4px;
+    }
+    .nav-list a { padding: 6px 10px; font-size: 0.85rem; }
+    .nav-list a .num { display: none; }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 80px 24px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 10%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-glow), transparent 60%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--accent);
+  }
+
+  h1.hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+  }
+  h1.hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 680px;
+    line-height: 1.55;
+    margin-bottom: 40px;
+  }
+
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin-top: 32px;
+  }
+  .meta-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .meta-chip .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+  .meta-chip.warm .dot { background: var(--warm); box-shadow: 0 0 8px var(--warm); }
+  .meta-chip.gold .dot { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+
+  /* Sections */
+  section.block {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .section-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 12px;
+    max-width: 700px;
+  }
+
+  /* Content typography */
+  .content { display: flex; flex-direction: column; gap: 24px; }
+  .content p { font-size: 1.02rem; color: var(--text); }
+  .content p.muted { color: var(--text-muted); }
+
+  .content h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.45rem;
+    letter-spacing: -0.01em;
+    margin-top: 12px;
+  }
+
+  .content ul, .content ol {
+    padding-left: 0;
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .content li {
+    position: relative;
+    padding-left: 26px;
+    line-height: 1.55;
+  }
+  .content ul li::before {
+    content: '';
+    position: absolute; left: 0; top: 0.7em;
+    width: 8px; height: 8px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+  }
+  .content ol { counter-reset: ol-counter; }
+  .content ol li { counter-increment: ol-counter; padding-left: 38px; }
+  .content ol li::before {
+    content: counter(ol-counter, decimal-leading-zero);
+    position: absolute; left: 0; top: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .content li strong { color: var(--text); font-weight: 700; }
+
+  .content a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .content a:hover { border-color: var(--accent); }
+  .content code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--accent);
+  }
+
+  /* Callout boxes */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    border-radius: 12px;
+    position: relative;
+  }
+  .callout.warn { border-left-color: var(--warm); background: linear-gradient(180deg, var(--warm-glow), transparent), var(--surface); }
+  .callout.danger { border-left-color: var(--danger); }
+  .callout.tip { border-left-color: var(--gold); background: linear-gradient(180deg, var(--gold-glow), transparent), var(--surface); }
+
+  .callout-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .callout.warn .callout-label { color: var(--warm); }
+  .callout.danger .callout-label { color: var(--danger); }
+  .callout.tip .callout-label { color: var(--gold); }
+  .callout-label::before { content: '◆'; font-size: 0.6rem; }
+
+  /* Card grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 40px rgba(0, 230, 200, 0.08);
+  }
+  .card-icon {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+  }
+  .card h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .card p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.55; }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 0.94rem;
+  }
+  .data-table th, .data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--bg-2);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table td.num {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .table-wrap { overflow-x: auto; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 8px; top: 12px; bottom: 12px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), var(--warm));
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 28px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px; top: 8px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--accent-glow);
+  }
+  .timeline-item .phase {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .timeline-item h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+  .timeline-item p { color: var(--text-muted); font-size: 0.94rem; }
+
+  /* CTA final */
+  .cta-box {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--accent-glow), transparent 60%);
+    filter: blur(40px);
+  }
+  .cta-box > * { position: relative; z-index: 1; }
+  .cta-box h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .cta-box h3 em { color: var(--accent); font-style: italic; }
+  .cta-box p {
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto 24px;
+  }
+  .cta-buttons {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn.ghost:hover { background: var(--accent-glow); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+  }
+  footer .splash {
+    display: inline-block;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  /* Wave divider */
+  .wave-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 32px 0;
+  }
+
+  /* Two col on desktop */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .two-col { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Pill tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .tag.accent { color: var(--accent); border-color: var(--accent); }
+  .tag.warm { color: var(--warm); border-color: var(--warm); }
+
+  /* Fade in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Checklist */
+  .checklist-progress {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+    position: sticky;
+    top: 70px;
+    z-index: 10;
+    backdrop-filter: blur(20px);
+    background: rgba(17, 40, 58, 0.92);
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .progress-label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .progress-count {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .progress-bar-wrap {
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--warm));
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  .progress-percent {
+    text-align: right;
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--accent);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .phase-group { margin-top: 32px; }
+
+  .phase-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .phase-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 4px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .phase-window {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-weight: 400;
+  }
+
+  .check-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .check-list li { padding: 0; }
+  .check-list li::before { display: none !important; }
+
+  .check-list label {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    line-height: 1.5;
+    font-size: 0.96rem;
+  }
+  .check-list label:hover {
+    border-color: var(--accent);
+    background: var(--surface-2);
+    transform: translateX(2px);
+  }
+  .check-list input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg);
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.18s ease;
+  }
+  .check-list label:hover .checkmark {
+    border-color: var(--accent);
+  }
+  .check-list input[type="checkbox"]:checked + .checkmark {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+  .check-list input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--bg);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .check-list label:has(input:checked) {
+    background: linear-gradient(90deg, var(--accent-glow), transparent);
+    border-color: rgba(0, 230, 200, 0.25);
+  }
+  .check-list label:has(input:checked) span:last-child {
+    text-decoration: line-through;
+    color: var(--text-muted);
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1.5px;
+  }
+
+  .checklist-actions {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+  }
+  #reset-checklist {
+    cursor: pointer;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+  }
+  #reset-checklist:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+    background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    .phase-window { margin-left: 0; flex-basis: 100%; }
+    .checklist-progress { padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="topnav">
+  <div class="inner">
+    <div class="brand">Bataille d'Eau · <span>LLN</span></div>
+    <button class="nav-toggle" onclick="document.getElementById('navlist').classList.toggle('open')">Menu</button>
+    <ul class="nav-list" id="navlist">
+      <li><a href="#mur"><span class="num">01</span>Le mur</a></li>
+      <li><a href="#commune"><span class="num">02</span>Commune</a></li>
+      <li><a href="#lieu"><span class="num">03</span>Lieu</a></li>
+      <li><a href="#securite"><span class="num">04</span>Sécurité</a></li>
+      <li><a href="#business"><span class="num">05</span>Business</a></li>
+      <li><a href="#marketing"><span class="num">06</span>Marketing</a></li>
+      <li><a href="#planning"><span class="num">07</span>Planning</a></li>
+      <li><a href="#astuces"><span class="num">08</span>Astuces</a></li>
+      <li><a href="#bigsplash"><span class="num">09</span>Big Splash</a></li>
+      <li><a href="#action"><span class="num">10</span>Action</a></li>
+      <li><a href="#checklist"><span class="num">11</span>Checklist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Plan d'action complet</div>
+  <h1 class="hero-title">Bataille d'eau<br>géante <em>à Louvain-la-Neuve.</em></h1>
+  <p class="hero-lead">De l'idée au jour J : le dossier complet pour transformer une intuition en événement public maîtrisé. Aspects légaux, lieu, sécurité, sponsoring, marketing, business model, rétroplanning et hacks d'organisation.</p>
+  <div class="hero-meta">
+    <div class="meta-chip"><span class="dot"></span>4-5 mois de prépa</div>
+    <div class="meta-chip warm"><span class="dot"></span>500+ participants visés</div>
+    <div class="meta-chip gold"><span class="dot"></span>Domaine public OLLN</div>
+  </div>
+</header>
+
+<!-- ============ 01 LE MUR ============ -->
+<section class="block" id="mur">
+  <div class="section-header">
+    <div class="section-num">01 — Fondations</div>
+    <h2 class="section-title">Le <em>mur juridique</em> à franchir avant tout.</h2>
+    <p class="section-sub">Avant toute communication, autorisation ou dépense, ce point doit être tranché. Le reste du plan en dépend.</p>
+  </div>
+
+  <div class="content">
+    <div class="callout danger">
+      <div class="callout-label">À titre personnel = bloqué</div>
+      <p>Organiser un événement public de cette ampleur en ton nom propre cumule trois risques majeurs : ta <strong>RC familiale ne couvre pas</strong> l'organisation d'événements publics (un accident grave = ruine personnelle), aucun sponsor sérieux ne signera avec une personne physique, et tu ne peux pas légalement encaisser des ventes (TVA, BCE) sans structure.</p>
+    </div>
+
+    <h3>Les trois voies pour avoir un cadre légal</h3>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">OPTION A · RECOMMANDÉE</div>
+        <h4>Greffe sur un kot-à-projet ou cercle UCLouvain</h4>
+        <p>Tu apportes le projet, ils apportent la structure (assurance, ASBL, expérience commune). Tu gardes la paternité. Zéro frais de constitution.</p>
+        <div class="tags">
+          <span class="tag accent">Rapide</span>
+          <span class="tag">Coût ~0€</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">OPTION B</div>
+        <h4>Créer ton ASBL dédiée</h4>
+        <p>~150€ de frais, 2-3 fondateurs minimum, statuts au Moniteur belge. Compte 3 à 6 semaines. Utile si tu veux pérenniser l'événement chaque année.</p>
+        <div class="tags">
+          <span class="tag">Coût ~150€</span>
+          <span class="tag warm">3-6 semaines</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">OPTION C</div>
+        <h4>Partenariat avec une ASBL événementielle</h4>
+        <p>Une asso existante prend la responsabilité juridique contre une commission (souvent 10-20% du CA). Moins de contrôle mais zéro friction admin.</p>
+        <div class="tags">
+          <span class="tag">Commission 10-20%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Conseil pro</div>
+      <p>Vise l'option A. Les cercles UCLouvain (Cercle Industriel, MEDI, Psycho, Droit, Sciences Éco, etc.) cherchent souvent des projets phares pour rayonner. Contacte d'abord <strong>le CSE</strong> (Comité Social Étudiant) et <strong>l'AGL</strong> (Assemblée Générale des étudiants de Louvain) — ils te redirigeront vers les bons interlocuteurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 COMMUNE ============ -->
+<section class="block" id="commune">
+  <div class="section-header">
+    <div class="section-num">02 — Administration</div>
+    <h2 class="section-title">Démarches <em>à la Ville</em> d'Ottignies-LLN.</h2>
+    <p class="section-sub">Un seul interlocuteur clé : le service Fêtes et Manifestations. Tout passe par lui.</p>
+  </div>
+
+  <div class="content">
+    <div class="two-col">
+      <div class="callout">
+        <div class="callout-label">Contact unique</div>
+        <p><strong>Service Fêtes &amp; Manifestations</strong><br>
+        Espace Cœur de Ville 2, 1340 Ottignies-LLN<br>
+        <code>010/43.61.60</code><br>
+        <code>manifestations@olln.be</code></p>
+      </div>
+      <div class="callout warn">
+        <div class="callout-label">Délai impératif</div>
+        <p>Dossier à déposer <strong>au plus tôt 4 mois</strong> et <strong>au plus tard 40 jours calendrier</strong> avant l'événement. Sous 40 jours = refus quasi automatique. Pour une grosse jauge, vise <strong>4-5 mois à l'avance</strong>.</p>
+      </div>
+    </div>
+
+    <h3>Le dossier complet à constituer</h3>
+    <ol>
+      <li><strong>Formulaire d'autorisation</strong> rempli intégralement, daté, signé.</li>
+      <li><strong>Programme détaillé</strong> : horaires de montage, animations, démontage, nettoyage.</li>
+      <li><strong>Plan d'implantation</strong> avec dimensions et distances entre installations (tonnelles, scène, citernes, food trucks).</li>
+      <li><strong>Attestation d'assurance RC organisateur</strong> (couverture min. recommandée : 1,5M€ dommages corporels).</li>
+      <li><strong>Plan de sécurité</strong> : flux, points de rassemblement, accès secours, gestion de foule.</li>
+      <li><strong>Liste des rues empruntées</strong> si itinérant + cartographie + position des signaleurs.</li>
+      <li><strong>Demande spécifique vente</strong> (mercantile) sur domaine public — à négocier explicitement.</li>
+    </ol>
+
+    <div class="callout danger">
+      <div class="callout-label">Piège à éviter — la "dalle"</div>
+      <p>À LLN, <strong>toute occupation mercantile ou promotionnelle sur la dalle est interdite</strong>, sauf marchés/braderies officiellement autorisés par la Ville. Si tu vises la dalle, tu devras négocier ferme avec la commune pour qualifier ton événement de "marché spécial" ou choisir un autre lieu.</p>
+    </div>
+
+    <h3>En parallèle : la Police de LLN</h3>
+    <ul>
+      <li>Si fermeture ou déviation de voirie : formulaire d'occupation du domaine public via <code>olln-formulaires.guichet-citoyen.be</code>.</li>
+      <li>Caution éventuelle pour occupation de voirie.</li>
+      <li>Accès véhicules sur la dalle : libre entre 06h-10h du lundi au samedi pour chargement. Après, clé à récupérer à la Police (rue du Monument 54, Ottignies) — caution 200€ par clé.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 03 LIEU ============ -->
+<section class="block" id="lieu">
+  <div class="section-header">
+    <div class="section-num">03 — Localisation</div>
+    <h2 class="section-title">Choisir le <em>bon spot</em>.</h2>
+    <p class="section-sub">Le lieu détermine ta jauge, ton budget sécurité, tes autorisations et l'ambiance. Quatre options sérieuses.</p>
+  </div>
+
+  <div class="content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">★★★★★ FAVORI</div>
+        <h4>Lac de LLN / Parc de la Source</h4>
+        <p>Cohérence narrative (l'eau près de l'eau), grand espace, drainage naturel, moins de contraintes mercantiles que la dalle. Idéal pour 500-1500 personnes.</p>
+        <div class="tags"><span class="tag accent">Recommandé</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">★★★☆☆</div>
+        <h4>Grand-Place de LLN</h4>
+        <p>Centralité maximale, visibilité, mais sur la dalle → autorisation mercantile spéciale obligatoire. Marketing-friendly mais admin lourde.</p>
+        <div class="tags"><span class="tag warm">Dalle = friction</span></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">★★★★☆</div>
+        <h4>Esplanade Aula Magna / parkings</h4>
+        <p>Espace dégagé, accès logistique simple, moins de contraintes que la dalle. Bon compromis si le lac est refusé.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">★★★☆☆</div>
+        <h4>Bois de Lauzelle (zones ouvertes)</h4>
+        <p>Si tu vises &gt;1000 personnes. Plus rural, moins de contraintes urbaines, mais logistique secours et accès véhicules plus complexes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">PLAN B</div>
+        <h4>Terrain privé loué</h4>
+        <p>Parking commercial, prairie en périphérie. Tu sors du cadre communal strict mais tu paies une location. Utile en backup si refus commune.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Critères de sélection à valider sur chaque lieu</div>
+      <ul>
+        <li>Accès <strong>raccord pompiers / hydrant</strong> pour ravitailler en eau.</li>
+        <li>Drainage / pente naturelle (éviter les flaques stagnantes &gt; 24h).</li>
+        <li>Distance à des riverains sensibles (limite plaintes bruit).</li>
+        <li>Accès véhicules secours dans un rayon &lt; 50m.</li>
+        <li>Sanitaires existants ou possibilité d'installer toilettes mobiles.</li>
+        <li>Sortie vestiaires / point de séchage envisageable.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 SÉCURITÉ ============ -->
+<section class="block" id="securite">
+  <div class="section-header">
+    <div class="section-num">04 — Risk management</div>
+    <h2 class="section-title">Sécurité, <em>assurances</em>, règles.</h2>
+    <p class="section-sub">Une bataille d'eau a l'air bénin. En réalité, les risques (oculaires, glissades, surchauffe, vol de matériel mouillé) doivent être couverts pro.</p>
+  </div>
+
+  <div class="content">
+    <h3>Assurances à souscrire</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Prestataires</th><th>Coût indicatif</th><th>Obligatoire ?</th></tr></thead>
+        <tbody>
+          <tr><td>RC organisateur événement</td><td>Ethias, AG, Belfius, P&amp;V</td><td class="num">150-600€</td><td>Oui</td></tr>
+          <tr><td>Annulation / intempéries</td><td>Allianz, Hiscox</td><td class="num">3-8% du budget</td><td>Recommandé</td></tr>
+          <tr><td>Tous risques matériel</td><td>via location matos</td><td class="num">~5% valeur</td><td>Selon</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Dispositifs de sécurité humains</h3>
+    <ul>
+      <li><strong>Croix-Rouge LLN</strong> — poste de premiers secours, obligatoire dès 500 personnes. ~200-400€/jour.</li>
+      <li><strong>Société de gardiennage agréée</strong> (SPF Intérieur) — obligatoire si vente d'alcool ou jauge &gt;1000. Compte 4-6 agents pour une jauge 500-1000.</li>
+      <li><strong>Bénévoles encadrants (staff)</strong> — 1 pour 25-30 participants. Dossards distinctifs, briefing pré-événement.</li>
+      <li>Lien préalable avec la <strong>police locale de Wavre-LLN</strong>.</li>
+    </ul>
+
+    <div class="callout warn">
+      <div class="callout-label">Charte participant — non négociable</div>
+      <ul>
+        <li><strong>Interdiction des pistolets haute pression</strong> type Stream Machine / Spyra (risque oculaire grave).</li>
+        <li><strong>Pas de ballons d'eau</strong> (déchets plastique → amende voirie + danger glissade).</li>
+        <li>Pas de tir au visage à moins de 3m.</li>
+        <li>Pas de jet sur matériel électronique d'autrui.</li>
+        <li>Pas d'eau froide en dessous de 10°C ajoutée (chocs thermiques).</li>
+        <li>Zone "dry" identifiée pour les non-participants/spectateurs/photographes.</li>
+      </ul>
+    </div>
+
+    <h3>Équipements à prévoir sur site</h3>
+    <ul>
+      <li>Point d'eau potable distinct des citernes "munitions".</li>
+      <li>Lunettes de protection en distribution / vente low-cost (1-2€).</li>
+      <li>Trousse premiers secours visible.</li>
+      <li>Zone séchage avec serviettes en location (5€ caution).</li>
+      <li>Bâches/tarpaulines pour zone "stockage tel" étanche (consigne payante).</li>
+      <li>Panneaux signalétique multilingue (FR/EN — beaucoup d'Erasmus à LLN).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 05 BUSINESS ============ -->
+<section class="block" id="business">
+  <div class="section-header">
+    <div class="section-num">05 — Économie</div>
+    <h2 class="section-title">Le <em>business model</em>.</h2>
+    <p class="section-sub">Événement gratuit à l'entrée, monétisation par sponsors, ventes et services. Voici l'arithmétique.</p>
+  </div>
+
+  <div class="content">
+    <h3>Sources de revenus</h3>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">REVENU PRINCIPAL</div>
+        <h4>Sponsors locaux &amp; marques</h4>
+        <p>Bars de la Grand-Place, Decathlon Wavre, BNP/Belfius (programmes étudiants), Coca-Cola, Red Bull (souvent partants pour public étudiant), Q-Park, fast-foods.</p>
+        <p class="muted" style="margin-top:8px;">Tickets : 500€ (visibilité simple) → 5000€ (sponsor principal nommé).</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">PACK PARTICIPANT</div>
+        <h4>Vente officielle équipement</h4>
+        <p>Pack = pistolet basique + lunettes + bandeau + bracelet d'accès. <strong>10-15€</strong>. Marge ~50%. Si 800 packs vendus → 4-6k€ de marge.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">MERCH</div>
+        <h4>T-shirts &amp; accessoires</h4>
+        <p>T-shirt avec logo qui apparaît mouillé (gimmick viral garanti), bobs, k-way, lunettes premium. Marge 60-70%.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">F&amp;B</div>
+        <h4>Food trucks &amp; buvette</h4>
+        <p>3-5 food trucks variés : forfait emplacement 50-150€/jour + % CA. Buvette soft/bière (si licence) : poste à fort revenu, souvent 30-40% de la marge totale.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">SERVICES</div>
+        <h4>Consignes &amp; séchage</h4>
+        <p>Sac étanche tel + clés (3€), location serviette (5€ caution), photos pro post-event en pack (15€).</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">UPSELL</div>
+        <h4>Billet VIP / "Splash Zone"</h4>
+        <p>Zone premium avec ravitaillement illimité en munitions, accès anticipé, pack t-shirt offert. 25-40€. Crée un sentiment de prestige et booste le ticket moyen.</p>
+      </div>
+    </div>
+
+    <h3>Coûts à anticiper (budget pour 500-800 pers.)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Poste</th><th>Fourchette basse</th><th>Fourchette haute</th></tr></thead>
+        <tbody>
+          <tr><td>Autorisations + caution</td><td class="num">200€</td><td class="num">500€</td></tr>
+          <tr><td>Assurances</td><td class="num">300€</td><td class="num">600€</td></tr>
+          <tr><td>Secours + gardiennage</td><td class="num">500€</td><td class="num">1500€</td></tr>
+          <tr><td>Eau (citernes, pompes, brumisateurs)</td><td class="num">500€</td><td class="num">2000€</td></tr>
+          <tr><td>Sonorisation / DJ</td><td class="num">800€</td><td class="num">2500€</td></tr>
+          <tr><td>Marketing + impression</td><td class="num">500€</td><td class="num">1500€</td></tr>
+          <tr><td>Stock revente (pistolets, merch)</td><td class="num">1500€</td><td class="num">5000€</td></tr>
+          <tr><td>Toilettes mobiles + nettoyage</td><td class="num">400€</td><td class="num">900€</td></tr>
+          <tr><td>Imprévus (15%)</td><td class="num">700€</td><td class="num">2200€</td></tr>
+          <tr style="background:var(--bg-2);"><td><strong>TOTAL</strong></td><td class="num"><strong>5 400€</strong></td><td class="num"><strong>16 700€</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Hack sponsoring</div>
+      <p>Ne vends pas "une affiche" aux sponsors. Vends de la <strong>data + contenu</strong> : nombre d'emails captés via inscription en ligne, vidéo aftermovie où leur logo apparaît, vues TikTok/Insta. Les marques paient 3x plus pour du contenu qu'un panneau passif.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 MARKETING ============ -->
+<section class="block" id="marketing">
+  <div class="section-header">
+    <div class="section-num">06 — Communication</div>
+    <h2 class="section-title">Marketing &amp; <em>viralité</em>.</h2>
+    <p class="section-sub">Public étudiant. Levier principal = social + relais via les cercles. Stratégie en trois phases.</p>
+  </div>
+
+  <div class="content">
+    <h3>Phase 1 — Mystère &amp; teasing (J-90 à J-60)</h3>
+    <ul>
+      <li>Création <strong>compte Instagram + TikTok</strong> dédiés (handle simple, mémorable).</li>
+      <li>Vidéo teaser drone sur le lieu, 15-20s, format vertical, promesse forte ("LA bataille d'eau la plus folle de Belgique").</li>
+      <li>Compte à rebours actif. 1 post tous les 2-3 jours.</li>
+      <li>Affichage "wild" sur les kots et cafétérias UCLouvain (avec autorisation AGL).</li>
+    </ul>
+
+    <h3>Phase 2 — Activation (J-60 à J-21)</h3>
+    <ul>
+      <li><strong>Partenariats créateurs étudiants</strong> : repère sur TikTok #louvainlaneuve, #UCLouvain, contacte 5-10 créateurs avec audience locale. Échange pack VIP + early access contre stories.</li>
+      <li><strong>Activation via les cercles</strong> : poste sur les Instagram du Cercle Industriel, MEDI, Psycho, Droit. Chaque relais cercle = +200-500 vues qualifiées.</li>
+      <li><strong>Site / landing page</strong> avec inscription email (gratuite mais nécessaire pour jauge). Tu captures l'audience pour les éditions suivantes.</li>
+      <li>Hashtag unique (#BataillEauLLN26 par ex.) + <strong>concours</strong> : meilleur déguisement waterproof, meilleure photo.</li>
+      <li>Presse locale : <em>L'Avenir Brabant Wallon</em>, <em>TV Com</em>, <em>Radio UCL</em>. Communiqué presse à J-21.</li>
+    </ul>
+
+    <h3>Phase 3 — Push final &amp; jour J (J-21 à J0)</h3>
+    <ul>
+      <li>Stories quotidiennes, behind-the-scenes du montage, interviews co-organisateurs.</li>
+      <li>Rappel inscription à J-7, J-3, J-1.</li>
+      <li>Jour J : live Instagram court (5min) au lancement + photographe/vidéaste pro sur site.</li>
+      <li>J+1 à J+7 : <strong>aftermovie</strong> en moins de 72h, c'est ton meilleur outil pour vendre l'édition suivante et les sponsors n+1.</li>
+    </ul>
+
+    <div class="callout tip">
+      <div class="callout-label">Idées de contenu qui marchent</div>
+      <ul>
+        <li>POV first-person en pistolet (caméra GoPro étanche).</li>
+        <li>Slow-mo des moments d'impact.</li>
+        <li>Réactions Erasmus (clivage culturel, mémique sur TikTok).</li>
+        <li>"Vlog organisateur" — montrer les coulisses crée de l'attachement.</li>
+        <li>UGC contest : meilleur clip participant repartagé sur le compte officiel.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 PLANNING ============ -->
+<section class="block" id="planning">
+  <div class="section-header">
+    <div class="section-num">07 — Timing</div>
+    <h2 class="section-title">Rétroplanning <em>sur 5 mois</em>.</h2>
+    <p class="section-sub">Sequence idéale. Si tu raccourcis ces phases, tu paies en stress et en qualité.</p>
+  </div>
+
+  <div class="content">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="phase">J-150 → J-120 · FONDATION</div>
+        <h4>Structure légale + équipe core</h4>
+        <p>Cadre légal réglé (option A/B/C). Équipe noyau de 5-8 personnes avec rôles définis. Choix de la date (idéal : mi-mai/juin après blocus, ou rentrée septembre).</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">J-120 → J-90 · DOSSIER</div>
+        <h4>Démarches commune + sponsors v1</h4>
+        <p>Dossier complet déposé à OLLN. Premiers rendez-vous sponsors (ceux avec décisions lentes : banques, grandes marques). Lieu confirmé en pré-accord avec la commune.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">J-90 → J-60 · LANCEMENT</div>
+        <h4>Autorisations + lancement teaser</h4>
+        <p>Autorisations reçues. Assurance souscrite. Lancement comptes réseaux + teaser. Ouverture inscriptions email. Devis fermes matériel/sono/sécurité.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">J-60 → J-30 · ACCÉLÉRATION</div>
+        <h4>Campagne marketing + commandes</h4>
+        <p>Campagne intensive social + créateurs. Commandes stocks (pistolets, merch, lunettes). Recrutement bénévoles (vise 30-50 personnes). Briefings sécurité.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">J-30 → J-7 · FINALISATION</div>
+        <h4>Push final + coordination</h4>
+        <p>Push marketing maximal. Coordination finale services secours / police / commune. Briefing complet équipe. Test du dispositif d'eau / pompes.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">J-7 → J-1 · MONTAGE</div>
+        <h4>Dernière ligne droite</h4>
+        <p>Rappels participants. Montage J-1 (tonnelles, signalétique, sono, citernes). Briefing du matin avec tous bénévoles + secours.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">JOUR J</div>
+        <h4>Exécution</h4>
+        <p>Roulement strict : accueil → distribution packs → montée en intensité → climax central → cool-down → fermeture.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">J+1 → J+14 · BOUCLAGE</div>
+        <h4>Démontage + capitalisation</h4>
+        <p>Nettoyage complet (caution !). Restitution matériel. Aftermovie sous 72h. Débrief sponsors. Bilan financier. Préparation édition n+1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 ASTUCES ============ -->
+<section class="block" id="astuces">
+  <div class="section-header">
+    <div class="section-num">08 — Edge</div>
+    <h2 class="section-title">Astuces &amp; <em>hacks</em> d'organisation.</h2>
+    <p class="section-sub">Tout ce qui ne tient pas dans les sections classiques mais fait la différence entre un événement amateur et un événement qui marque.</p>
+  </div>
+
+  <div class="content">
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">VALIDATION PROTOTYPE</div>
+        <h4>Fais une "édition zéro" à 50 personnes</h4>
+        <p>Avant de viser 800 personnes, organise une mini-version privée (entre potes) sur un terrain privé. Tu testes le dispositif eau, la logistique, les règles. Ça t'évite des plantages publics.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">SEGMENTATION</div>
+        <h4>Zone "wet" / zone "dry"</h4>
+        <p>Crée une zone "dry" pour les spectateurs, photographes, parents, et ceux qui veulent juste l'ambiance. Tu doubles ton audience potentielle et tu peux y monétiser food/buvette.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">DIVERSIFICATION</div>
+        <h4>Sous-zones thématiques</h4>
+        <p>Zone "famille" (jets doux, ballons éponge), zone "compétition" (équipes, drapeau à conquérir), zone "freestyle". Permet de rationaliser les risques par zone et d'élargir l'audience.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">TIMING OPTIMAL</div>
+        <h4>Date stratégique</h4>
+        <p>Mi-mai à fin juin (post-blocus, pré-jurés) ou mi-septembre (rentrée, énergie). Évite août (étudiants absents) et octobre (météo). Vérifie le calendrier UCLouvain pour pas tomber sur examens / 24h vélo / autres temps forts.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">REVENUS PARTENAIRES</div>
+        <h4>"After" en partenariat avec un bar</h4>
+        <p>Négocie avec un bar de la Grand-Place : ils accueillent ton "after" officiel et te reversent un % du CA additionnel généré. Win-win : tu monétises sans gérer la buvette tardive.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">CAPITAL DATA</div>
+        <h4>Capture des emails dès J-90</h4>
+        <p>Même avec entrée gratuite, oblige une inscription email. Tu construis un asset (5000+ emails étudiants engagés) qui vaut très cher pour la pérennité du projet et les éditions suivantes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">CONSIGNE</div>
+        <h4>Sac étanche tel + clés (3€)</h4>
+        <p>Service simple, marge élevée (~80%), gros besoin participant. Évite aussi les drames téléphones perdus → réduit ta charge SAV émotionnel post-event.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">EFFET LEVIER</div>
+        <h4>Trouve UN sponsor "ancre" tôt</h4>
+        <p>Le premier gros sponsor signé rassure tous les autres. Vise une signature à J-100. Les suivants tombent en cascade. Tu peux aussi proposer une exclusivité catégorie (1 seul brasseur, 1 seule banque) qui justifie un prix plus élevé.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">RÉGULATION</div>
+        <h4>Bracelets de couleur = règles claires</h4>
+        <p>Vert = participant standard. Bleu = staff/arbitre. Rouge = ne pas viser (mineurs, presse, photographe pro, urgence médicale). Système simple, fluide, repris instantanément.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">CONTENU À LONG TERME</div>
+        <h4>Documente tout dès J0</h4>
+        <p>Journal de bord du projet (vidéo, photos coulisses) sur compte privé / Notion. Si tu rends le projet récurrent, ces archives valent de l'or pour pitcher sponsors n+1 et recruter une équipe motivée.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">RESPONSABILITÉ</div>
+        <h4>Décharge participant à l'inscription</h4>
+        <p>Sur le formulaire d'inscription en ligne, intègre une <strong>case à cocher de décharge</strong> ("Je reconnais participer à mes risques, je m'engage à respecter la charte"). Pas une protection légale absolue, mais ça filtre les comportements à risque et renforce ton dossier en cas de litige.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">URGENCE CLIMATIQUE</div>
+        <h4>Plan B météo</h4>
+        <p>Vent fort + pluie = annulation. Définis ton seuil d'annulation 48h avant (Météo Belgique, IRM). Communique la procédure à l'inscription (remboursement pack si applicable, ou report date). L'assurance annulation/intempéries couvre la perte sèche.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Erreurs à ne PAS commettre</div>
+      <ul>
+        <li>Lancer la com avant d'avoir l'autorisation commune en main → si refus, tu te ridiculises et tu rembourses.</li>
+        <li>Sous-estimer le nettoyage post-event → la caution est en jeu, et la commune ne pardonne pas un site sale.</li>
+        <li>Promettre aux sponsors un nombre de participants non garanti → mets toujours une fourchette ("400-800") et un palier minimum garanti.</li>
+        <li>Recruter des bénévoles sans briefing écrit → chaos garanti le jour J. Une session de 1h obligatoire en amont.</li>
+        <li>Ignorer les Erasmus dans la com → ils représentent 15-20% du public LLN, communique aussi en EN.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 BIG SPLASH ============ -->
+<section class="block" id="bigsplash">
+  <div class="section-header">
+    <div class="section-num">09 — Référence</div>
+    <h2 class="section-title">L'inspiration : <em>Big Splash</em> à Leuven.</h2>
+    <p class="section-sub">Un précédent belge directement applicable. Format éprouvé pendant 4 éditions, public similaire (étudiants universitaires), tu peux décoder leur recette.</p>
+  </div>
+
+  <div class="content">
+    <div class="callout">
+      <div class="callout-label">Le précédent</div>
+      <p>De 2012 à 2015 (et plus), le cercle étudiant <strong>Ekonomika</strong> de la KU Leuven a organisé chaque année <strong>Lipton Ice Tea Big Splash</strong> sur la <strong>Ladeuzeplein</strong> (place principale devant la bibliothèque universitaire). C'est officiellement la plus grande bataille de ballons d'eau de Belgique. La 2e édition (24 avril 2013) a réuni 3000 étudiants combattants + 2500 supporters. La 3e édition (2014) a dépassé les 10 000 personnes sur la place.</p>
+    </div>
+
+    <h3>Le format qui a marché — à décoder</h3>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">FORMAT COMPÉTITIF</div>
+        <h4>Tournoi par équipes à élimination directe</h4>
+        <p>15 à 16 équipes de 200 personnes (chaque cercle étudiant envoie une délégation). Matches de ~10 minutes, élimination directe jusqu'à la finale. Crée un climax narratif, garde l'attention, donne des "champions" à mettre en avant.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">RÈGLE LISIBLE</div>
+        <h4>"Le praeses le plus sec gagne"</h4>
+        <p>Chaque équipe désigne un capitaine ("praeses"). L'équipe dont le capitaine est le moins mouillé remporte le match. Règle ultra-simple, visuellement claire, médiatique. En finale Big Splash : faire tomber le praeses adverse d'un socle à coups de ballons.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">SPONSOR TITRE</div>
+        <h4>Une marque colle son nom</h4>
+        <p><strong>Lipton Ice Tea</strong> a sponsorisé l'événement pendant des années → "Lipton Ice Tea Big Splash". Place colorée en jaune canari (ballons jaunes). C'est le modèle de sponsoring le plus rentable : exclusivité catégorie, naming droits, visibilité massive.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">PRIX ÉTUDIANT</div>
+        <h4>Trophée : une TD gratuite</h4>
+        <p>Le cercle gagnant remportait l'organisation d'une <strong>TD (Thé Dansant)</strong> payée par l'organisateur. Prix peu coûteux mais hautement désirable dans la culture étudiante. À adapter pour LLN : guindaille gratuite, voyage, ou cagnotte cercle.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">RELAIS MÉDIA</div>
+        <h4>Présentateur télé sur scène</h4>
+        <p>Sean Dhondt (JIM TV) animait l'événement. JIM TV et Radio NRJ envoyaient leurs propres équipes participer → audience garantie + couverture média gratuite. À LLN : <strong>vise un VJ de Tarmac, NRJ Belgique, ou un créateur TikTok belge à 100k+ followers</strong>.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">OUVERTURE NATIONALE</div>
+        <h4>Cercles invités d'autres villes</h4>
+        <p>Dès la 3e édition : équipes invitées de Bruxelles et Liège, présentation bilingue NL/FR. Crée une dimension nationale, élargit la base, médiatise davantage. <strong>Énorme opportunité pour toi à LLN</strong> : inviter des cercles flamands → événement "réconciliation linguistique" = pure or médiatique.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Ce que tu peux directement copier — et améliorer</div>
+      <ul>
+        <li><strong>Adopte le format tournoi</strong>. Bien plus médiatique qu'un free-for-all chaotique. Cadre la sécurité aussi.</li>
+        <li><strong>Invite les cercles UCLouvain explicitement</strong> par lettre nominative (Industriel, MEDI, Psycho, Droit, ESPO, Sciences, Pharma, Médecine, etc.). Tu démarres avec 8-12 équipes garanties.</li>
+        <li><strong>Big Splash a abandonné les ballons d'eau</strong> ces dernières années (déchets plastique). Toi tu peux te positionner d'emblée comme <strong>"zéro ballon, pistolets uniquement"</strong> → angle écolo différenciant.</li>
+        <li><strong>Récupère leur sponsor</strong>. Lipton n'est plus sponsor de Big Splash depuis quelques années. Tu peux les approcher avec un dossier "réactivons votre événement signature, version francophone".</li>
+        <li><strong>Crée un nom marquant</strong>. "Big Splash" est pris. À toi : "Splash LLN", "La Trempe", "L'Inondation Étudiante", "Aqua Battle Wavre-LLN"... à brainstormer.</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-label">Erreur à ne PAS reproduire</div>
+      <p>Big Splash a connu une polémique écologique sur le gaspillage des ballons en latex (200 000 ballons utilisés sur une édition = pollution massive) et la consommation d'eau (record de gaspillage critiqué publiquement). Anticipe cette critique dès J-0 dans ta communication : <strong>eau de pluie récupérée, pistolets réutilisables vendus puis repris, partenariat ONG eau (1€ reversé par participant à WaterAid ou Eau Vive)</strong>. Ça transforme une attaque potentielle en avantage marketing.</p>
+    </div>
+
+    <h3>Stats clés à viser pour LLN</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Métrique</th><th>Big Splash 2013</th><th>Big Splash 2014</th><th>Ton objectif édition 1 LLN</th></tr></thead>
+        <tbody>
+          <tr><td>Participants actifs</td><td class="num">3 000</td><td class="num">~6 000</td><td class="num">500-800</td></tr>
+          <tr><td>Spectateurs</td><td class="num">2 500</td><td class="num">~4 000</td><td class="num">300-500</td></tr>
+          <tr><td>Équipes / cercles</td><td class="num">15</td><td class="num">16</td><td class="num">6-10</td></tr>
+          <tr><td>Sponsor titre</td><td>Lipton Ice Tea</td><td>Lipton Ice Tea</td><td>À conquérir</td></tr>
+          <tr><td>Couverture média</td><td>JIM TV, KUL News</td><td>National</td><td>L'Avenir BW, TV Com, Radio UCL</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="muted">Sois ambitieux mais réaliste sur l'édition 1. Big Splash a explosé à la 3e édition. Ton objectif édition 1 = prouver le concept, capter les sponsors et la presse, créer le contenu pour vendre l'édition 2.</p>
+  </div>
+</section>
+
+<!-- ============ 10 ACTION ============ -->
+<section class="block" id="action">
+  <div class="section-header">
+    <div class="section-num">10 — Cette semaine</div>
+    <h2 class="section-title">Tes <em>trois actions</em> immédiates.</h2>
+    <p class="section-sub">Tout le reste découle de ces trois jalons. Si tu les fais cette semaine, le projet existe vraiment.</p>
+  </div>
+
+  <div class="content">
+    <ol>
+      <li><strong>Identifier 2-3 kots-à-projet ou cercles UCLouvain</strong> à approcher pour servir de structure d'accueil. Liste à établir selon ton réseau / faculté.</li>
+      <li><strong>Appeler le service Fêtes &amp; Manifestations</strong> au <code>010/43.61.60</code> pour un pré-rendez-vous informel. Tu vérifies la faisabilité avant d'investir 5 mois de travail.</li>
+      <li><strong>Constituer un noyau de 4-5 personnes motivées</strong> avec compétences complémentaires : juridique/admin, marketing/social, logistique terrain, finance/sponsors, créa/visuels.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 11 CHECKLIST ============ -->
+<section class="block" id="checklist">
+  <div class="section-header">
+    <div class="section-num">11 — Suivi</div>
+    <h2 class="section-title">Checklist &amp; <em>avancement</em>.</h2>
+    <p class="section-sub">Coche au fur et à mesure. Ton avancement est sauvegardé automatiquement dans ce navigateur. Recharge la page, tu retrouves où tu en es.</p>
+  </div>
+
+  <div class="content">
+
+    <!-- Progress bar -->
+    <div class="checklist-progress">
+      <div class="progress-meta">
+        <span class="progress-label">Avancement global</span>
+        <span class="progress-count"><span id="checked-count">0</span> / <span id="total-count">0</span></span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+      <div class="progress-percent"><span id="progress-percent">0</span>%</div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 1</span> Fondations &amp; cadre légal <span class="phase-window">J-150 à J-120</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="f1"><span class="checkmark"></span>Choisir le cadre légal (option A/B/C : cercle étudiant, ASBL, ou partenariat)</label></li>
+        <li><label><input type="checkbox" data-id="f2"><span class="checkmark"></span>Contacter CSE et AGL UCLouvain</label></li>
+        <li><label><input type="checkbox" data-id="f3"><span class="checkmark"></span>Approcher 2-3 cercles cibles avec pitch</label></li>
+        <li><label><input type="checkbox" data-id="f4"><span class="checkmark"></span>Constituer noyau de 5-8 personnes avec rôles définis</label></li>
+        <li><label><input type="checkbox" data-id="f5"><span class="checkmark"></span>Choisir la date définitive (vérif. calendrier UCLouvain)</label></li>
+        <li><label><input type="checkbox" data-id="f6"><span class="checkmark"></span>Brainstormer + valider le nom de l'événement</label></li>
+        <li><label><input type="checkbox" data-id="f7"><span class="checkmark"></span>Réserver les noms de comptes réseaux (Instagram, TikTok, domaine)</label></li>
+      </ul>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 2</span> Dossier commune &amp; lieu <span class="phase-window">J-120 à J-90</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="c1"><span class="checkmark"></span>Pré-rdv informel service Fêtes &amp; Manifestations (010/43.61.60)</label></li>
+        <li><label><input type="checkbox" data-id="c2"><span class="checkmark"></span>Repérage des 3-4 lieux candidats sur le terrain</label></li>
+        <li><label><input type="checkbox" data-id="c3"><span class="checkmark"></span>Vérifier accès raccord pompiers/hydrant sur le lieu retenu</label></li>
+        <li><label><input type="checkbox" data-id="c4"><span class="checkmark"></span>Rédiger programme détaillé (horaires montage/démontage)</label></li>
+        <li><label><input type="checkbox" data-id="c5"><span class="checkmark"></span>Dessiner plan d'implantation avec dimensions</label></li>
+        <li><label><input type="checkbox" data-id="c6"><span class="checkmark"></span>Rédiger plan de sécurité (flux, points de rassemblement)</label></li>
+        <li><label><input type="checkbox" data-id="c7"><span class="checkmark"></span>Déposer dossier officiel à OLLN (40j min, 4 mois max avant)</label></li>
+        <li><label><input type="checkbox" data-id="c8"><span class="checkmark"></span>Contact police LLN si fermeture voirie nécessaire</label></li>
+      </ul>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 3</span> Sécurité, assurance, sponsors v1 <span class="phase-window">J-90 à J-60</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="s1"><span class="checkmark"></span>Souscrire RC organisateur d'événement (Ethias/AG/Belfius)</label></li>
+        <li><label><input type="checkbox" data-id="s2"><span class="checkmark"></span>Souscrire assurance annulation/intempéries</label></li>
+        <li><label><input type="checkbox" data-id="s3"><span class="checkmark"></span>Réserver Croix-Rouge LLN pour le jour J</label></li>
+        <li><label><input type="checkbox" data-id="s4"><span class="checkmark"></span>Devis société de gardiennage agréée</label></li>
+        <li><label><input type="checkbox" data-id="s5"><span class="checkmark"></span>Rédiger la charte participant</label></li>
+        <li><label><input type="checkbox" data-id="s6"><span class="checkmark"></span>Préparer dossier sponsor (deck + offres tiers)</label></li>
+        <li><label><input type="checkbox" data-id="s7"><span class="checkmark"></span>Approcher sponsor ancre (cible : signer 1 sponsor majeur)</label></li>
+        <li><label><input type="checkbox" data-id="s8"><span class="checkmark"></span>Lancer comptes Instagram + TikTok officiels</label></li>
+        <li><label><input type="checkbox" data-id="s9"><span class="checkmark"></span>Tourner la vidéo teaser drone</label></li>
+        <li><label><input type="checkbox" data-id="s10"><span class="checkmark"></span>Mettre en ligne la landing page avec inscription email</label></li>
+      </ul>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 4</span> Marketing intensif &amp; logistique <span class="phase-window">J-60 à J-30</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="m1"><span class="checkmark"></span>Lancer campagne intensive social media</label></li>
+        <li><label><input type="checkbox" data-id="m2"><span class="checkmark"></span>Partenariats avec 5-10 créateurs étudiants TikTok</label></li>
+        <li><label><input type="checkbox" data-id="m3"><span class="checkmark"></span>Activer relais via Instagram des cercles UCLouvain</label></li>
+        <li><label><input type="checkbox" data-id="m4"><span class="checkmark"></span>Affichage kots et cafétérias (autorisation AGL)</label></li>
+        <li><label><input type="checkbox" data-id="m5"><span class="checkmark"></span>Commander stock pistolets + lunettes + bandeaux</label></li>
+        <li><label><input type="checkbox" data-id="m6"><span class="checkmark"></span>Commander merch (t-shirts, bobs, accessoires)</label></li>
+        <li><label><input type="checkbox" data-id="m7"><span class="checkmark"></span>Recruter 30-50 bénévoles</label></li>
+        <li><label><input type="checkbox" data-id="m8"><span class="checkmark"></span>Briefer chaque bénévole (session 1h obligatoire)</label></li>
+        <li><label><input type="checkbox" data-id="m9"><span class="checkmark"></span>Confirmer 3-5 food trucks + signer contrats</label></li>
+        <li><label><input type="checkbox" data-id="m10"><span class="checkmark"></span>Réserver sono / DJ / présentateur</label></li>
+        <li><label><input type="checkbox" data-id="m11"><span class="checkmark"></span>Réserver toilettes mobiles</label></li>
+      </ul>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 5</span> Push final &amp; coordination <span class="phase-window">J-30 à J-7</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="p1"><span class="checkmark"></span>Communiqué presse envoyé (L'Avenir, TV Com, Radio UCL)</label></li>
+        <li><label><input type="checkbox" data-id="p2"><span class="checkmark"></span>Push marketing maximal sur réseaux</label></li>
+        <li><label><input type="checkbox" data-id="p3"><span class="checkmark"></span>Réunion coordination finale services secours/police</label></li>
+        <li><label><input type="checkbox" data-id="p4"><span class="checkmark"></span>Test dispositif eau (citernes, pompes, pression)</label></li>
+        <li><label><input type="checkbox" data-id="p5"><span class="checkmark"></span>Préparer dossards bénévoles + bracelets couleur</label></li>
+        <li><label><input type="checkbox" data-id="p6"><span class="checkmark"></span>Vérifier plan B météo (seuil annulation défini)</label></li>
+        <li><label><input type="checkbox" data-id="p7"><span class="checkmark"></span>Briefing complet équipe à J-3</label></li>
+        <li><label><input type="checkbox" data-id="p8"><span class="checkmark"></span>Rappels SMS/email aux inscrits (J-7, J-3, J-1)</label></li>
+      </ul>
+    </div>
+
+    <!-- Phase 6 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 6</span> Montage &amp; Jour J <span class="phase-window">J-1 à J0</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="j1"><span class="checkmark"></span>Montage J-1 : tonnelles, signalétique, sono, citernes</label></li>
+        <li><label><input type="checkbox" data-id="j2"><span class="checkmark"></span>Briefing matinal du staff + secours à J0</label></li>
+        <li><label><input type="checkbox" data-id="j3"><span class="checkmark"></span>Distribution packs participants</label></li>
+        <li><label><input type="checkbox" data-id="j4"><span class="checkmark"></span>Live Instagram au lancement</label></li>
+        <li><label><input type="checkbox" data-id="j5"><span class="checkmark"></span>Photographe/vidéaste pro actif toute la journée</label></li>
+        <li><label><input type="checkbox" data-id="j6"><span class="checkmark"></span>Cool-down + fermeture progressive</label></li>
+      </ul>
+    </div>
+
+    <!-- Phase 7 -->
+    <div class="phase-group">
+      <h3 class="phase-title"><span class="phase-tag">PHASE 7</span> Bouclage &amp; capitalisation <span class="phase-window">J+1 à J+14</span></h3>
+      <ul class="check-list">
+        <li><label><input type="checkbox" data-id="b1"><span class="checkmark"></span>Nettoyage complet du site (caution !)</label></li>
+        <li><label><input type="checkbox" data-id="b2"><span class="checkmark"></span>Restitution matériel loué + clé(s) police</label></li>
+        <li><label><input type="checkbox" data-id="b3"><span class="checkmark"></span>Aftermovie publié sous 72h</label></li>
+        <li><label><input type="checkbox" data-id="b4"><span class="checkmark"></span>Email récap + photos aux participants</label></li>
+        <li><label><input type="checkbox" data-id="b5"><span class="checkmark"></span>Débrief avec chaque sponsor (ROI chiffré)</label></li>
+        <li><label><input type="checkbox" data-id="b6"><span class="checkmark"></span>Bilan financier consolidé</label></li>
+        <li><label><input type="checkbox" data-id="b7"><span class="checkmark"></span>Débrief interne équipe : 3 wins / 3 fails</label></li>
+        <li><label><input type="checkbox" data-id="b8"><span class="checkmark"></span>Lancer planification édition n+1</label></li>
+      </ul>
+    </div>
+
+    <div class="checklist-actions">
+      <button class="btn ghost" id="reset-checklist">Réinitialiser la checklist</button>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="splash">— splash —</div>
+  <div>Plan d'action · Bataille d'Eau LLN · Version 1.1</div>
+</footer>
+
+<script>
+  // Scroll progress
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = scrolled + '%';
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section.block, .card, .timeline-item, .callout').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-list a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 1024) {
+        document.getElementById('navlist').classList.remove('open');
+      }
+    });
+  });
+
+  // ===== CHECKLIST PERSISTENCE & PROGRESS =====
+  const STORAGE_KEY = 'battaille_eau_lln_checklist_v1';
+  const checkboxes = document.querySelectorAll('.check-list input[type="checkbox"]');
+  const totalCountEl = document.getElementById('total-count');
+  const checkedCountEl = document.getElementById('checked-count');
+  const progressBarEl = document.getElementById('progress-bar-fill');
+  const progressPercentEl = document.getElementById('progress-percent');
+
+  totalCountEl.textContent = checkboxes.length;
+
+  // Load saved state
+  function loadState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      checkboxes.forEach(cb => {
+        const id = cb.dataset.id;
+        if (saved[id]) cb.checked = true;
+      });
+    } catch (e) {}
+  }
+
+  // Save state
+  function saveState() {
+    const state = {};
+    checkboxes.forEach(cb => {
+      if (cb.checked) state[cb.dataset.id] = true;
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  // Update progress UI
+  function updateProgress() {
+    const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const total = checkboxes.length;
+    const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+    checkedCountEl.textContent = checked;
+    progressBarEl.style.width = pct + '%';
+    progressPercentEl.textContent = pct;
+  }
+
+  loadState();
+  updateProgress();
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      saveState();
+      updateProgress();
+    });
+  });
+
+  // Reset
+  document.getElementById('reset-checklist').addEventListener('click', () => {
+    if (confirm('Réinitialiser toute la checklist ? Cette action est irréversible.')) {
+      checkboxes.forEach(cb => cb.checked = false);
+      localStorage.removeItem(STORAGE_KEY);
+      updateProgress();
+    }
+  });
+</script>
+
+</body>
+</html>
